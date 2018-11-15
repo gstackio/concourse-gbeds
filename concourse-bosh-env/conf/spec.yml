@@ -1,0 +1,150 @@
+---
+subsys:
+  name: concourse-bosh-env
+  type: bosh-environment
+  depends_on: [ concourse-garden-env ]
+
+input_resources:
+  - name: bosh-deployment
+    type: git
+    uri: https://github.com/cloudfoundry/bosh-deployment.git
+    version: "28deae6" # BOSH v268.2.0 (as of Oct 26nd, 2018)
+  - name: prometheus-boshrelease
+    type: git
+    uri: https://github.com/bosh-prometheus/prometheus-boshrelease.git
+    version: v23.3.0
+
+
+infra_vars:
+  alias: vbox # the Bosh CLI alias
+  iaas: virtualbox # the GBE environment flavor
+
+dns:
+  zone: example.com
+  subdomain: easyfoundry
+
+
+main_deployment_file: bosh-deployment/bosh.yml
+
+operations_files:
+  10_bosh-deployment:
+    - virtualbox/cpi
+    - virtualbox/remote
+    - bosh-lite
+    - experimental/blobstore-https
+    - experimental/blobstore-https-bosh-lite
+    - jumpbox-user
+    - uaa
+    - credhub
+  20_prometheus-boshrelease:
+    - manifests/operators/bosh/add-bosh-exporter-uaa-clients
+  30_local:
+    - keep-bosh-agent
+    - custom-stemcell-version
+    - custom-bosh-version-precompiled
+    - disable-resurrector
+    - set-disk-size
+    - scale-vm-size
+    - enable-index-based-dns-aliases
+    - remove-garden
+    - uaa-bosh-lite
+    - credhub-bosh-lite
+
+variables_files:
+  10_local:
+    - file: secrets
+      example:
+        vbox_ssh:
+          private_key: |
+            -----BEGIN RSA PRIVATE KEY-----
+            ...
+            -----END RSA PRIVATE KEY-----
+
+
+deployment_vars:
+  director_name: easyfoundry-director
+
+  disk_size: 60_000 # i.e. 60GB
+
+  external_ip: ~
+  vbox_host: ~
+  vbox_username: ~
+
+  internal_ip: "192.168.50.6"
+  internal_gw: "192.168.50.1"
+  internal_cidr: 192.168.50.0/24
+
+
+  # Versions
+
+  bosh_precompiled_version: "268.2.0"
+  bosh_precompiled_url: https://s3.amazonaws.com/bosh-compiled-release-tarballs/bosh-268.2.0-ubuntu-xenial-97.28-20181024-210824-586102372-20181024210828.tgz
+  bosh_precompiled_sha1: 3107ba41a109561cf181862ac59aa1e82ab0b286
+
+  # stemcell_name:    # imported below
+  # stemcell_version: # imported below
+  # stemcell_sha1:    # imported below
+
+
+imported_vars:
+  - subsys: concourse-garden-env
+    imports:
+
+      - name: stemcell_name
+        from: depl-vars
+        path: /stemcell_name
+      - name: stemcell_version
+        from: depl-vars
+        path: /stemcell_version
+      - name: stemcell_sha1
+        from: depl-vars
+        path: /stemcell_sha1
+
+      # For 'remove-garden.yml' ops file
+      - name: garden_backend_ip
+        from: depl-vars
+        path: /internal_ip
+
+      - name: garden_jumpbox_ssh_private_key
+        from: depl-creds
+        path: /jumpbox_ssh/private_key
+
+
+      - name: nats_password
+        from: depl-creds
+        path: /nats_password
+
+      - name: nats_ca
+        from: depl-creds
+        path: /nats_ca
+
+      - name: nats_server_tls
+        from: depl-creds
+        path: /nats_server_tls
+
+      - name: nats_clients_director_tls
+        from: depl-creds
+        path: /nats_clients_director_tls
+
+      - name: nats_clients_health_monitor_tls
+        from: depl-creds
+        path: /nats_clients_health_monitor_tls
+
+
+      # Blobstore is deployed here but its credentials are generated in Garden
+      # deployment because it also needs them and is deployed first
+      - name: blobstore_director_password
+        from: depl-creds
+        path: /blobstore_director_password
+
+      - name: blobstore_agent_password
+        from: depl-creds
+        path: /blobstore_agent_password
+
+      - name: blobstore_ca
+        from: depl-creds
+        path: /blobstore_ca
+
+      - name: blobstore_server_tls
+        from: depl-creds
+        path: /blobstore_server_tls

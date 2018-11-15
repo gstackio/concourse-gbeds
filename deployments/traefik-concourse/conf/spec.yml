@@ -1,0 +1,86 @@
+---
+subsys:
+  name: traefik-concourse
+  type: bosh-deployment
+  depends_on: []
+
+input_resources:
+  - name: traefik-boshrelease
+    type: git
+    uri: https://github.com/gstackio/traefik-boshrelease.git
+    version: "9b8c5ca" # master after version 1.2.0
+
+
+main_deployment_file: traefik-boshrelease/deployment/traefik-deployment.yml
+
+operations_files:
+  10_traefik-boshrelease:
+    - deployment/operations/rename-deployment
+    - deployment/operations/rename-network
+    - deployment/operations/enable-lets-encrypt
+    - deployment/operations/enable-web-backend
+    - deployment/operations/static-ip
+  20_local:
+    - pin-stemcell
+    - scale-disk
+    # - activate-debug
+    - traefik-config
+
+
+deployment_vars:
+  deployment_name: traefik
+
+
+  # User-facing settings
+
+  web_backend_hostname: traefik.ci.example.com
+
+  acme_certs_email: acme-certs@example.com
+  acme_staging: true
+
+  web_backend_username: admin
+
+  # static_ip: ~      # imported below
+
+
+  # Versions
+
+  stemcell_name: bosh-warden-boshlite-ubuntu-xenial-go_agent
+  stemcell_os: ubuntu-xenial
+  stemcell_version: "97.32"
+  stemcell_sha1: 9448c28eaedccff300f1384991132fb8d5dae47c
+
+
+  # Reference declarations
+
+  network_name: default
+  # Reflecting 'traefik-boshrelease/deployment/cloud-config/cf-integration.yml':
+  traefik_vm_extension: traefik-loadbalancer
+
+
+  # Plumbery
+
+  traefik_domain: ci.example.com # for generated certificates
+
+
+imported_vars:
+  - subsys: concourse-garden-env # instead of generic 'base-env', to be fixed
+    imports:
+      - name: static_ip
+        from: depl-vars
+        path: /web_router_ip
+
+  - subsys: concourse-standalone
+    imports:
+      - name: concourse_external_host
+        from: depl-vars
+        path: /external_host
+      - name: concourse_web_ip0
+        from: depl-vars
+        path: /web_ip0
+      - name: concourse_web_ip1
+        from: depl-vars
+        path: /web_ip1
+      - name: concourse_tls_port
+        from: depl-vars
+        path: /atc_tls_bind_port

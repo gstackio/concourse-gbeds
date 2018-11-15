@@ -1,0 +1,24 @@
+---
+
+- path: /instance_groups/name=db/instances
+  type: replace
+  # You cannot scale the default PostgreSQL database to more than one node,
+  # unfortunately. Because the 'postgres' BOSH release doesn't implement any
+  # leader-follower topology, nor any automatic failover.
+  value: 1
+
+- path: /instance_groups/name=uaa/instances
+  type: replace
+  value: 2
+
+- path: /instance_groups/name=credhub/instances
+  type: replace
+  value: 2
+
+- path: /instance_groups/name=web/instances
+  type: replace
+  value: 2
+
+- path: /instance_groups/name=worker/instances
+  type: replace
+  value: 2

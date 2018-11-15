@@ -1,0 +1,17 @@
+---
+
+- path: /instance_groups/name=web/jobs/name=atc/properties/external_url
+  type: replace
+  value: https://((external_host))
+
+- path: /instance_groups/name=web/jobs/name=atc/properties/tls_bind_port?
+  type: replace
+  value: ((atc_tls_bind_port))
+
+
+- path: /instance_groups/name=web/jobs/name=atc/properties/x_frame_options?
+  type: replace
+  # Prevent clickjacking attacks
+  # See <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options>
+  # See <https://en.wikipedia.org/wiki/clickjacking>
+  value: DENY

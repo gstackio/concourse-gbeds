@@ -1,0 +1,57 @@
+---
+
+- path: /instance_groups/name=traefik/jobs/name=traefik/properties/traefik?/accept_invalid_backend_certificates
+  type: replace
+  value: true
+
+- path: /instance_groups/name=traefik/jobs/name=traefik/properties/traefik/file?
+  type: replace
+  value:
+    enabled: true
+    rules: |
+      [backends]
+        [backends.traefik-ui]
+          [backends.traefik-ui.servers.server1]
+          url = "http://127.0.0.1:8080"
+
+        [backends.concourse-tls-backend]
+          [backends.concourse-tls-backend.servers.atc0-tls]
+          url = "https://((concourse_web_ip0)):((concourse_tls_port))"
+
+          [backends.concourse-tls-backend.servers.atc1-tls]
+          url = "https://((concourse_web_ip1)):((concourse_tls_port))"
+
+        [backends.concourse-tls-backend.circuitBreaker]
+          expression = "NetworkErrorRatio() > 0.5"
+
+        [backends.concourse-tls-backend.loadBalancer]
+          method = "drr"
+
+        [backends.concourse-tls-backend.healthCheck]
+          path = "/"
+          port = ((concourse_tls_port))
+          interval = "20s"
+          scheme = "https"
+          hostname = "((concourse_external_host))"
+
+      [frontends]
+        [frontends.traefik-ui]
+        entrypoints = [ "https" ]
+        priority = 10
+        backend = "traefik-ui"
+        passHostHeader = true
+          [frontends.traefik-ui.routes.route1]
+          rule = "Host: ((web_backend_hostname))"
+
+        [frontends.concourse-tls-frontend]
+        entrypoints = [ "https" ]
+        priority = 20
+        backend = "concourse-tls-backend"
+        passHostHeader = true
+          [frontends.concourse-tls-frontend.routes.main]
+          rule = "Host: ((concourse_external_host))"
+    watch: true
+
+- path: /instance_groups/name=traefik/vm_extensions?/-
+  type: replace
+  value: ((traefik_vm_extension))
