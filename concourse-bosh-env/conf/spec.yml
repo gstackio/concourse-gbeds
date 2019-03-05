@@ -62,7 +62,7 @@ variables_files:
 
 
 deployment_vars:
-  director_name: easyfoundry-director
+  director_name: concourse-director
 
   disk_size: 60_000 # i.e. 60GB
 
