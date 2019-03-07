@@ -79,6 +79,8 @@ We first Git-clone GBE next to this repo, and we name it `bosh-environment`.
 git clone https://github.com/gstackio/gstack-bosh-environment.git bosh-environment
 git clone https://github.com/gstackio/concourse-gbeds.git
 cd concourse-gbeds/
+echo "--- {}" > concourse-bosh-env/conf/secrets.yml
+chmod 600 concourse-bosh-env/conf/secrets.yml
 ```
 
 Then we go check the [GBE pre-requisites][gbe_bare_metal_doc]. Here the
