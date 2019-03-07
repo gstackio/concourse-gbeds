@@ -45,6 +45,7 @@ operations_files:
     - (( replace ))
     - routing
     - static-web
+    - static-credhub
     - scale-for-minimal-downtime-upgrades
 
 
@@ -93,6 +94,8 @@ deployment_vars:
   web_ip1: 10.244.16.68
   atc_tls_bind_port: 4443
   web_network_vm_extension: (( prune ))
+  credhub_ip0: 10.244.16.83
+  credhub_ip1: 10.244.16.84
 
 
 imported_vars:
