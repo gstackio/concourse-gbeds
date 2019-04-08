@@ -48,6 +48,7 @@ operations_files:
     - static-credhub
     - static-uaa
     - scale-for-minimal-downtime-upgrades
+    - trust-traefik-ca
 
 
 # variables_files: {}
@@ -119,3 +120,7 @@ imported_vars:
       - name: stemcell_sha1
         from: depl-vars
         path: /stemcell_sha1
+
+      - name: traefik_ca_cert
+        from: depl-creds
+        path: /traefikCA/certificate

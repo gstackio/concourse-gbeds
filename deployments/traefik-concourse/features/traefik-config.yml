@@ -34,6 +34,49 @@
           scheme = "https"
           hostname = "((concourse_external_host))"
 
+
+        [backends.credhub-tls-backend]
+          [backends.credhub-tls-backend.servers.credhub0-tls]
+          url = "https://((concourse_credhub_ip0)):((credhub_tls_port))"
+
+          [backends.credhub-tls-backend.servers.credhub1-tls]
+          url = "https://((concourse_credhub_ip1)):((credhub_tls_port))"
+
+        [backends.credhub-tls-backend.circuitBreaker]
+          expression = "NetworkErrorRatio() > 0.5"
+
+        [backends.credhub-tls-backend.loadBalancer]
+          method = "drr"
+
+        [backends.credhub-tls-backend.healthCheck]
+          path = "/info"
+          port = ((credhub_tls_port))
+          interval = "20s"
+          scheme = "https"
+          hostname = "credhub.((concourse_external_host))"
+
+
+        [backends.uaa-tls-backend]
+          [backends.uaa-tls-backend.servers.uaa0-tls]
+          url = "https://((concourse_uaa_ip0)):((uaa_tls_port))"
+
+          [backends.uaa-tls-backend.servers.uaa1-tls]
+          url = "https://((concourse_uaa_ip1)):((uaa_tls_port))"
+
+        [backends.uaa-tls-backend.circuitBreaker]
+          expression = "NetworkErrorRatio() > 0.5"
+
+        [backends.uaa-tls-backend.loadBalancer]
+          method = "drr"
+
+        [backends.uaa-tls-backend.healthCheck]
+          path = "/"
+          port = ((uaa_tls_port))
+          interval = "20s"
+          scheme = "https"
+          hostname = "uaa.((concourse_external_host))"
+
+
       [frontends]
         [frontends.traefik-ui]
         entrypoints = [ "https" ]
@@ -48,8 +91,24 @@
         priority = 20
         backend = "concourse-tls-backend"
         passHostHeader = true
-          [frontends.concourse-tls-frontend.routes.main]
+          [frontends.concourse-tls-frontend.routes.atc-main]
           rule = "Host: ((concourse_external_host))"
+
+        [frontends.credhub-tls-frontend]
+        entrypoints = [ "https" ]
+        priority = 20
+        backend = "credhub-tls-backend"
+        passHostHeader = true
+          [frontends.credhub-tls-frontend.routes.credhub-main]
+          rule = "Host: credhub.((concourse_external_host))"
+
+        [frontends.uaa-tls-frontend]
+        entrypoints = [ "https" ]
+        priority = 20
+        backend = "uaa-tls-backend"
+        passHostHeader = true
+          [frontends.uaa-tls-frontend.routes.uaa-main]
+          rule = "Host: uaa.((concourse_external_host))"
     watch: true
 
 - path: /instance_groups/name=traefik/vm_extensions?/-

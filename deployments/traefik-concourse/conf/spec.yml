@@ -84,3 +84,23 @@ imported_vars:
       - name: concourse_tls_port
         from: depl-vars
         path: /atc_tls_bind_port
+
+      - name: concourse_credhub_ip0
+        from: depl-vars
+        path: /credhub_ip0
+      - name: concourse_credhub_ip1
+        from: depl-vars
+        path: /credhub_ip1
+      - name: credhub_tls_port
+        from: depl-vars
+        path: /credhub_tls_port
+
+      - name: concourse_uaa_ip0
+        from: depl-vars
+        path: /uaa_ip0
+      - name: concourse_uaa_ip1
+        from: depl-vars
+        path: /uaa_ip1
+      - name: uaa_tls_port
+        from: depl-vars
+        path: /uaa_tls_port
