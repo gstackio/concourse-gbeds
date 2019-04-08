@@ -12,7 +12,7 @@ input_resources:
   - name: easyfoundry-gbe
     type: subsys-upstream
     uri: https://github.com/gstackio/gstack-bosh-environment.git
-    version: "5ab4eea" # master as of 2019-03-03
+    version: "655029b" # master as of 2019-04-09
 
 
 sanity-tests:
@@ -71,14 +71,14 @@ deployment_vars:
   bosh_dns_aliases_version: "0.0.3"
   bosh_dns_aliases_sha1: b0d0a0350ed87f1ded58b2ebb469acea0e026ccc
 
-  credhub_version: "2.1.2"
-  credhub_sha1:    754a24dbffe8bc5efce7e698d935b5f4df541f38
+  credhub_version: "2.1.5"
+  credhub_sha1:    5f119fef55569740d6181247f9fe6560faa3e514
 
-  uaa_version: "70.0"
-  uaa_sha1: c23b71fb2a3d01a1f494753b7f00ae40c549838f
+  uaa_version: "72.0"
+  uaa_sha1: 7130e5ac640ed1e1f52c09e76995e4d0680f3b45
 
-  bpm_version: "1.0.3"
-  bpm_sha1: 2875a69cae225fa97fe3faae1e9fbacff61e2dc5
+  bpm_version: "1.0.4"
+  bpm_sha1: 41df19697d6a69d2552bc2c132928157fa91abe0
 
   # stemcell_os:              # imported below
   # stemcell_version:         # imported below
