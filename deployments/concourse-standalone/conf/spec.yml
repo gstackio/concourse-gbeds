@@ -46,6 +46,7 @@ operations_files:
     - routing
     - static-web
     - static-credhub
+    - static-uaa
     - scale-for-minimal-downtime-upgrades
 
 
@@ -94,8 +95,14 @@ deployment_vars:
   web_ip1: 10.244.16.68
   atc_tls_bind_port: 4443
   web_network_vm_extension: (( prune ))
+
   credhub_ip0: 10.244.16.83
   credhub_ip1: 10.244.16.84
+  credhub_tls_port: 8844
+
+  uaa_ip0: 10.244.16.99
+  uaa_ip1: 10.244.16.100
+  uaa_tls_port: 8443
 
 
 imported_vars:

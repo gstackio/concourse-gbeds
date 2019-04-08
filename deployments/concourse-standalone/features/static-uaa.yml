@@ -1,0 +1,13 @@
+---
+
+- path: /instance_groups/name=uaa/networks/0/static_ips?
+  type: replace
+  value: [ ((uaa_ip0)), ((uaa_ip1)) ]
+
+- path: /variables/name=uaa-tls/options/alternative_names?/-
+  type: replace
+  value: ((uaa_ip0))
+
+- path: /variables/name=uaa-tls/options/alternative_names?/-
+  type: replace
+  value: ((uaa_ip1))
