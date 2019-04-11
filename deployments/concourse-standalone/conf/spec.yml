@@ -41,6 +41,7 @@ operations_files:
     - deployments/concourse/features/basic-auth-with-vars  # replaces 'cluster/operations/basic-auth'
     - deployments/concourse/features/encryption-vars       # augments 'cluster/operations/encryption'
     - deployments/concourse/features/credhub-integration-with-uaa-and-db-tls
+    - deployments/concourse/features/trust-traefik-ca
   40_local:
     - (( replace ))
     - routing
@@ -48,7 +49,6 @@ operations_files:
     - static-credhub
     - static-uaa
     - scale-for-minimal-downtime-upgrades
-    - trust-traefik-ca
 
 
 # variables_files: {}
