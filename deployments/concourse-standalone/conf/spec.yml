@@ -12,7 +12,7 @@ input_resources:
   - name: easyfoundry-gbe
     type: subsys-upstream
     uri: https://github.com/gstackio/gstack-bosh-environment.git
-    version: "655029b" # master as of 2019-04-09
+    version: "80a23bf" # master as of 2019-04-11
 
 
 sanity-tests:
