@@ -8,7 +8,7 @@ input_resources:
   - name: traefik-boshrelease
     type: git
     uri: https://github.com/gstackio/traefik-boshrelease.git
-    version: "9b8c5ca" # master after version 1.2.0
+    version: v1.3.0
 
 
 main_deployment_file: traefik-boshrelease/deployment/traefik-deployment.yml
@@ -18,7 +18,7 @@ operations_files:
     - deployment/operations/rename-deployment
     - deployment/operations/rename-network
     - deployment/operations/enable-lets-encrypt
-    - deployment/operations/enable-web-backend
+    - deployment/operations/enable-api
     - deployment/operations/static-ip
   20_local:
     - pin-stemcell
@@ -38,7 +38,7 @@ deployment_vars:
   acme_certs_email: acme-certs@example.com
   acme_staging: true
 
-  web_backend_username: admin
+  api_username: admin
 
   # static_ip: ~      # imported below
 

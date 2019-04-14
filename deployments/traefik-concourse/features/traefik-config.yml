@@ -12,7 +12,8 @@
       [backends]
         [backends.traefik-ui]
           [backends.traefik-ui.servers.server1]
-          url = "http://127.0.0.1:8080"
+          url = "https://127.0.0.1:8443"
+
 
         [backends.concourse-tls-backend]
           [backends.concourse-tls-backend.servers.atc0-tls]
