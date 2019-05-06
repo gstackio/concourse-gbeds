@@ -79,13 +79,13 @@
 
 
       [frontends]
-        [frontends.traefik-ui]
+        [frontends.traefik-api]
         entrypoints = [ "https" ]
         priority = 10
-        backend = "traefik-ui"
+        backend = "traefik-api"
         passHostHeader = true
-          [frontends.traefik-ui.routes.route1]
-          rule = "Host: ((web_backend_hostname))"
+          [frontends.traefik-api.routes.api-main]
+          rule = "Host: ((api_hostname))"
 
         [frontends.concourse-tls-frontend]
         entrypoints = [ "https" ]

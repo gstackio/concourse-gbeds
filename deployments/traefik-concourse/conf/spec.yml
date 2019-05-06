@@ -26,21 +26,25 @@ operations_files:
     # - activate-debug
     - traefik-config
 
+variables_files:
+  10_local:
+    - file: private-config
+      example:
+        # User-facing settings
+        acme_certs_email: acme-certs@example.com
+        api_username: admin
+
+        # Plumbery
+        traefik_domain: ci.example.com # for generated certificates
+
 
 deployment_vars:
   deployment_name: traefik
 
 
-  # User-facing settings
+  # Debugging
 
-  web_backend_hostname: traefik.ci.example.com
-
-  acme_certs_email: acme-certs@example.com
   acme_staging: true
-
-  api_username: admin
-
-  # static_ip: ~      # imported below
 
 
   # Versions
@@ -58,12 +62,16 @@ deployment_vars:
   traefik_vm_extension: traefik-loadbalancer
 
 
-  # Plumbery
-
-  traefik_domain: ci.example.com # for generated certificates
-
-
 imported_vars:
+  - subsys: traefik-concourse # instead of generic 'base-env', to be fixed
+    imports:
+      # Note: this is actually an auto-import trick in order to inject a value
+      # from private-config.yml into the 'api_hostname' variable
+      - name: api_hostname
+        from: depl-vars
+        file: private-config
+        value: traefik.((traefik_domain))
+
   - subsys: concourse-garden-env # instead of generic 'base-env', to be fixed
     imports:
       - name: static_ip
