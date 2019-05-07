@@ -51,8 +51,8 @@ deployment_vars:
 
   stemcell_name: bosh-warden-boshlite-ubuntu-xenial-go_agent
   stemcell_os: ubuntu-xenial
-  stemcell_version: "250.29"
-  stemcell_sha1: 708a56a7072d9eae4afe5ac4160528a5035cafea
+  stemcell_version: "250.38"
+  stemcell_sha1: 92238f2c47e390be7779ca2b18fb898f4bdb40de
 
 
   # Reference declarations
