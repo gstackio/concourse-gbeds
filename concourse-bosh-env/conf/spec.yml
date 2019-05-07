@@ -77,9 +77,9 @@ deployment_vars:
 
   # Versions
 
-  bosh_precompiled_version: "268.2.0"
-  bosh_precompiled_url: https://s3.amazonaws.com/bosh-compiled-release-tarballs/bosh-268.2.0-ubuntu-xenial-97.28-20181024-210824-586102372-20181024210828.tgz
-  bosh_precompiled_sha1: 3107ba41a109561cf181862ac59aa1e82ab0b286
+  # bosh_precompiled_version: # imported below
+  # bosh_precompiled_url:     # imported below
+  # bosh_precompiled_sha1:    # imported below
 
   # stemcell_name:    # imported below
   # stemcell_version: # imported below
