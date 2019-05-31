@@ -14,68 +14,74 @@
           [backends.traefik-ui.servers.server1]
           url = "https://127.0.0.1:8443"
 
+          [backends.traefik-ui.healthCheck]
+            path = "/ping"
+
 
         [backends.concourse-tls-backend]
-          [backends.concourse-tls-backend.servers.atc0-tls]
-          url = "https://((concourse_web_ip0)):((concourse_tls_port))"
+          [backends.concourse-tls-backend.servers]
+            [backends.concourse-tls-backend.servers.atc0-tls]
+            url = "https://((concourse_web_ip0)):((concourse_tls_port))"
 
-          [backends.concourse-tls-backend.servers.atc1-tls]
-          url = "https://((concourse_web_ip1)):((concourse_tls_port))"
+            [backends.concourse-tls-backend.servers.atc1-tls]
+            url = "https://((concourse_web_ip1)):((concourse_tls_port))"
 
-        [backends.concourse-tls-backend.circuitBreaker]
-          expression = "NetworkErrorRatio() > 0.5"
+          [backends.concourse-tls-backend.circuitBreaker]
+            expression = "NetworkErrorRatio() > 0.5"
 
-        [backends.concourse-tls-backend.loadBalancer]
-          method = "drr"
+          [backends.concourse-tls-backend.loadBalancer]
+            method = "drr"
 
-        [backends.concourse-tls-backend.healthCheck]
-          path = "/"
-          port = ((concourse_tls_port))
-          interval = "20s"
-          scheme = "https"
-          hostname = "((concourse_external_host))"
+          [backends.concourse-tls-backend.healthCheck]
+            path = "/"
+            port = ((concourse_tls_port))
+            interval = "20s"
+            scheme = "https"
+            hostname = "((concourse_external_host))"
 
 
         [backends.credhub-tls-backend]
-          [backends.credhub-tls-backend.servers.credhub0-tls]
-          url = "https://((concourse_credhub_ip0)):((credhub_tls_port))"
+          [backends.credhub-tls-backend.servers]
+            [backends.credhub-tls-backend.servers.credhub0-tls]
+            url = "https://((concourse_credhub_ip0)):((credhub_tls_port))"
 
-          [backends.credhub-tls-backend.servers.credhub1-tls]
-          url = "https://((concourse_credhub_ip1)):((credhub_tls_port))"
+            [backends.credhub-tls-backend.servers.credhub1-tls]
+            url = "https://((concourse_credhub_ip1)):((credhub_tls_port))"
 
-        [backends.credhub-tls-backend.circuitBreaker]
-          expression = "NetworkErrorRatio() > 0.5"
+          [backends.credhub-tls-backend.circuitBreaker]
+            expression = "NetworkErrorRatio() > 0.5"
 
-        [backends.credhub-tls-backend.loadBalancer]
-          method = "drr"
+          [backends.credhub-tls-backend.loadBalancer]
+            method = "drr"
 
-        [backends.credhub-tls-backend.healthCheck]
-          path = "/info"
-          port = ((credhub_tls_port))
-          interval = "20s"
-          scheme = "https"
-          hostname = "credhub.((concourse_external_host))"
+          [backends.credhub-tls-backend.healthCheck]
+            path = "/info"
+            port = ((credhub_tls_port))
+            interval = "20s"
+            scheme = "https"
+            hostname = "credhub.((concourse_external_host))"
 
 
         [backends.uaa-tls-backend]
-          [backends.uaa-tls-backend.servers.uaa0-tls]
-          url = "https://((concourse_uaa_ip0)):((uaa_tls_port))"
+          [backends.uaa-tls-backend.servers]
+            [backends.uaa-tls-backend.servers.uaa0-tls]
+            url = "https://((concourse_uaa_ip0)):((uaa_tls_port))"
 
-          [backends.uaa-tls-backend.servers.uaa1-tls]
-          url = "https://((concourse_uaa_ip1)):((uaa_tls_port))"
+            [backends.uaa-tls-backend.servers.uaa1-tls]
+            url = "https://((concourse_uaa_ip1)):((uaa_tls_port))"
 
-        [backends.uaa-tls-backend.circuitBreaker]
-          expression = "NetworkErrorRatio() > 0.5"
+          [backends.uaa-tls-backend.circuitBreaker]
+            expression = "NetworkErrorRatio() > 0.5"
 
-        [backends.uaa-tls-backend.loadBalancer]
-          method = "drr"
+          [backends.uaa-tls-backend.loadBalancer]
+            method = "drr"
 
-        [backends.uaa-tls-backend.healthCheck]
-          path = "/"
-          port = ((uaa_tls_port))
-          interval = "20s"
-          scheme = "https"
-          hostname = "uaa.((concourse_external_host))"
+          [backends.uaa-tls-backend.healthCheck]
+            path = "/"
+            port = ((uaa_tls_port))
+            interval = "20s"
+            scheme = "https"
+            hostname = "uaa.((concourse_external_host))"
 
 
       [frontends]
