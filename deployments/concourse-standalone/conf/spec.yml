@@ -12,14 +12,14 @@ input_resources:
   - name: easyfoundry-gbe
     type: subsys-upstream
     uri: https://github.com/gstackio/gstack-bosh-environment.git
-    version: "8453b78" # master as of 2019-04-16
+    version: "45b77ad" # master as of 2019-10-08
 
 
 sanity-tests:
   concourse-target: gk # like Gstack
 
 
-# main_deployment_file: ""
+# main_deployment_file: # use value from upstream
 
 operations_files: null
 operations_files:
@@ -51,34 +51,26 @@ operations_files:
     - scale-for-minimal-downtime-upgrades
 
 
-# variables_files: {}
+# variables_files: # use value from upstream
 
 
 deployment_vars:
   deployment_name: concourse
 
 
-  # User-facing settings
-
-  external_host: ci.example.com
-
-
   # Versions
 
-  os_conf_version: "20.0.0"
-  os_conf_sha1: a60187f038d45e2886db9df82b72a9ab5fdcc49d
+  os_conf_version: "21.0.0"
+  os_conf_sha1: 7579a96515b265c6d828924bf4f5fae115798199
 
   bosh_dns_aliases_version: "0.0.3"
   bosh_dns_aliases_sha1: b0d0a0350ed87f1ded58b2ebb469acea0e026ccc
 
-  credhub_version: "2.1.5"
-  credhub_sha1:    5f119fef55569740d6181247f9fe6560faa3e514
+  credhub_version: "2.5.6"
+  credhub_sha1: 788c7da077480fc76a49a69095debbd887c9250e
 
-  uaa_version: "72.0"
-  uaa_sha1: 7130e5ac640ed1e1f52c09e76995e4d0680f3b45
-
-  bpm_version: "1.0.4"
-  bpm_sha1: 41df19697d6a69d2552bc2c132928157fa91abe0
+  uaa_version: "74.2.0"
+  uaa_sha1: bcc9909e61df23da1deb0612d7950a56bcd2fd9f
 
   # stemcell_os:              # imported below
   # stemcell_version:         # imported below
