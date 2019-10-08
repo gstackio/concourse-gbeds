@@ -8,15 +8,13 @@ input_resources:
   - name: traefik-boshrelease
     type: git
     uri: https://github.com/gstackio/traefik-boshrelease.git
-    version: v1.3.0
+    version: 3e2091d # v1.8.0 (Traefik v1.7.18) with compiled release for stemcell v456.27
 
 
 main_deployment_file: traefik-boshrelease/deployment/traefik-deployment.yml
 
 operations_files:
   10_traefik-boshrelease:
-    - deployment/operations/rename-deployment
-    - deployment/operations/rename-network
     - deployment/operations/enable-lets-encrypt
     - deployment/operations/enable-api
     - deployment/operations/static-ip
@@ -31,11 +29,9 @@ variables_files:
     - file: private-config
       example:
         # User-facing settings
+        traefik_domain: ci.example.com
         acme_certs_email: acme-certs@example.com
         api_username: admin
-
-        # Plumbery
-        traefik_domain: ci.example.com # for generated certificates
 
 
 deployment_vars:
@@ -51,8 +47,8 @@ deployment_vars:
 
   stemcell_name: bosh-warden-boshlite-ubuntu-xenial-go_agent
   stemcell_os: ubuntu-xenial
-  stemcell_version: "250.38"
-  stemcell_sha1: 92238f2c47e390be7779ca2b18fb898f4bdb40de
+  stemcell_version: "456.27"
+  stemcell_sha1: 518b991efb9d1e5fb2c861e7c180e076ae66f76e
 
 
   # Reference declarations
@@ -63,12 +59,12 @@ deployment_vars:
 
 
 imported_vars:
-  - subsys: traefik-concourse # instead of generic 'base-env', to be fixed
+  - subsys: traefik-concourse
     imports:
       # Note: this is actually an auto-import trick in order to inject a value
       # from private-config.yml into the 'api_hostname' variable
       - name: api_hostname
-        from: depl-vars
+        from: vars-file
         file: private-config
         value: traefik.((traefik_domain))
 
