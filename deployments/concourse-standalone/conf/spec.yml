@@ -33,6 +33,7 @@ operations_files:
     - cluster/operations/encryption
     - cluster/operations/tls
     - cluster/operations/tls-vars
+    - cluster/operations/storage-driver
   30_local: (( prune ))
   30_easyfoundry-gbe:
     - (( replace ))
