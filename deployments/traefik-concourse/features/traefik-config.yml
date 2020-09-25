@@ -26,8 +26,8 @@
             [backends.concourse-tls-backend.servers.atc1-tls]
             url = "https://((concourse_web_ip1)):((concourse_tls_port))"
 
-          [backends.concourse-tls-backend.circuitBreaker]
-            expression = "NetworkErrorRatio() > 0.5"
+          # [backends.concourse-tls-backend.circuitBreaker]
+          #   expression = "NetworkErrorRatio() > 0.5"
 
           [backends.concourse-tls-backend.loadBalancer]
             method = "drr"
@@ -48,8 +48,8 @@
             [backends.credhub-tls-backend.servers.credhub1-tls]
             url = "https://((concourse_credhub_ip1)):((credhub_tls_port))"
 
-          [backends.credhub-tls-backend.circuitBreaker]
-            expression = "NetworkErrorRatio() > 0.5"
+          # [backends.credhub-tls-backend.circuitBreaker]
+          #   expression = "NetworkErrorRatio() > 0.5"
 
           [backends.credhub-tls-backend.loadBalancer]
             method = "drr"
@@ -70,8 +70,8 @@
             [backends.uaa-tls-backend.servers.uaa1-tls]
             url = "https://((concourse_uaa_ip1)):((uaa_tls_port))"
 
-          [backends.uaa-tls-backend.circuitBreaker]
-            expression = "NetworkErrorRatio() > 0.5"
+          # [backends.uaa-tls-backend.circuitBreaker]
+          #   expression = "NetworkErrorRatio() > 0.5"
 
           [backends.uaa-tls-backend.loadBalancer]
             method = "drr"
