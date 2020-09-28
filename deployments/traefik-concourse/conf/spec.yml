@@ -8,10 +8,10 @@ input_resources:
   - name: traefik-boshrelease
     type: git
     uri: https://github.com/gstackio/traefik-boshrelease.git
-    version: 3e2091d # v1.8.0 (Traefik v1.7.18) with compiled release for stemcell v456.27
+    version: "1b1bf77" # v1.13.0 (Traefik v1.7.24) with compiled release for stemcell v621.84
 
 
-main_deployment_file: traefik-boshrelease/deployment/traefik-deployment.yml
+main_deployment_file: traefik-boshrelease/deployment/traefik.yml
 
 operations_files:
   10_traefik-boshrelease:
