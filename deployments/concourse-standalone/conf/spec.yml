@@ -12,7 +12,7 @@ input_resources:
   - name: easyfoundry-gbe
     type: subsys-upstream
     uri: https://github.com/gstackio/gstack-bosh-environment.git
-    version: "45b77ad" # master as of 2019-10-08
+    version: "8b3ed75" # master as of 2020-09-29
 
 
 sanity-tests:
@@ -42,10 +42,10 @@ operations_files:
     - deployments/concourse/features/basic-auth-with-vars  # replaces 'cluster/operations/basic-auth'
     - deployments/concourse/features/encryption-vars       # augments 'cluster/operations/encryption'
     - deployments/concourse/features/credhub-integration-with-uaa-and-db-tls
-    - deployments/concourse/features/trust-traefik-ca
   40_local:
     - (( replace ))
     - routing
+    - trust-traefik-ca # customized version of 'deployments/concourse/features/trust-traefik-ca'
     - static-web
     - static-credhub
     - static-uaa
@@ -61,17 +61,17 @@ deployment_vars:
 
   # Versions
 
-  os_conf_version: "21.0.0"
-  os_conf_sha1: 7579a96515b265c6d828924bf4f5fae115798199
+  os_conf_version: "22.1.0"
+  os_conf_sha1: 7ef05f6f3ebc03f59ad8131851dbd1abd1ab3663
 
   bosh_dns_aliases_version: "0.0.3"
   bosh_dns_aliases_sha1: b0d0a0350ed87f1ded58b2ebb469acea0e026ccc
 
-  credhub_version: "2.5.6"
-  credhub_sha1: 788c7da077480fc76a49a69095debbd887c9250e
+  credhub_version: "2.9.0"
+  credhub_sha1: 36d3a92588c33bc3a7ce54cd4714c96cc7d1bee2
 
-  uaa_version: "74.2.0"
-  uaa_sha1: bcc9909e61df23da1deb0612d7950a56bcd2fd9f
+  uaa_version: "74.25.0"
+  uaa_sha1: 7eb46ce8d64d11e3bcfb52fc7c26c1e72085fd69
 
   # stemcell_os:              # imported below
   # stemcell_version:         # imported below
