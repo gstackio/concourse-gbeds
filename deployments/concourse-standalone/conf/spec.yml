@@ -50,6 +50,9 @@ operations_files:
     - static-credhub
     - static-uaa
     - scale-for-minimal-downtime-upgrades
+    # - use-uaa-ip-url-for-credhub
+    # - add-local-users
+    # - debug-credhub
 
 
 # variables_files: # use value from upstream
