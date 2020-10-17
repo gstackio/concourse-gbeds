@@ -16,6 +16,7 @@ main_deployment_file: traefik-boshrelease/deployment/traefik.yml
 operations_files:
   10_traefik-boshrelease:
     - deployment/operations/enable-lets-encrypt
+    - deployment/operations/disable-default-tls-certificate # to remove when bumping to v1.14.0
     - deployment/operations/enable-api
     - deployment/operations/static-ip
   20_local:
@@ -40,7 +41,7 @@ deployment_vars:
 
   # Debugging
 
-  acme_staging: true
+  acme_staging: false
 
 
   # Versions
