@@ -1,0 +1,1 @@
+../src/gstack-bosh-environment/bin/check-certs-expiry.sh
