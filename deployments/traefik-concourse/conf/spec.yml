@@ -8,7 +8,7 @@ input_resources:
   - name: traefik-boshrelease
     type: git
     uri: https://github.com/gstackio/traefik-boshrelease.git
-    version: "1b1bf77" # v1.13.0 (Traefik v1.7.24) with compiled release for stemcell v621.84
+    version: "6473e21" # v1.14.0 (Traefik v1.7.26) with compiled release for stemcell v621.90
 
 
 main_deployment_file: traefik-boshrelease/deployment/traefik.yml
@@ -16,7 +16,6 @@ main_deployment_file: traefik-boshrelease/deployment/traefik.yml
 operations_files:
   10_traefik-boshrelease:
     - deployment/operations/enable-lets-encrypt
-    - deployment/operations/disable-default-tls-certificate # to remove when bumping to v1.14.0
     - deployment/operations/enable-api
     - deployment/operations/static-ip
   20_local:
