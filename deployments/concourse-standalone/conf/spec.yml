@@ -119,4 +119,4 @@ imported_vars:
 
       - name: traefik_ca_cert
         from: depl-creds
-        path: /traefikCA/certificate
+        path: /traefik_ca/certificate
