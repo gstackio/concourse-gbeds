@@ -34,7 +34,7 @@ operations_files:
     - cluster/operations/tls
     - cluster/operations/tls-vars
     - cluster/operations/storage-driver
-  30_local: (( prune ))
+  30_prometheus-boshrelease: (( prune ))
   30_easyfoundry-gbe:
     - (( replace ))
     - deployments/concourse/features/pin-stemcell
