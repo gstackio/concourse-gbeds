@@ -12,7 +12,7 @@ input_resources:
   - name: easyfoundry-gbe
     type: subsys-upstream
     uri: https://github.com/gstackio/gstack-bosh-environment.git
-    version: "8b3ed75" # master as of 2020-09-29
+    version: "f6e819b" # master as of 2020-11-25
 
 
 sanity-tests:
@@ -88,10 +88,10 @@ deployment_vars:
 
   # Reference declarations
 
+  web_ip: (( prune ))
   web_ip0: 10.244.16.67
   web_ip1: 10.244.16.68
   atc_tls_bind_port: 4443
-  web_network_vm_extension: (( prune ))
 
   credhub_ip0: 10.244.16.83
   credhub_ip1: 10.244.16.84
