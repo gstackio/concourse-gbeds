@@ -22,6 +22,7 @@ operations_files:
     - pin-stemcell
     - scale-disk
     # - activate-debug
+    - routing
     - traefik-config
 
 variables_files:

@@ -117,7 +117,3 @@
           [frontends.uaa-tls-frontend.routes.uaa-main]
           rule = "Host: uaa.((concourse_external_host))"
     watch: true
-
-- path: /instance_groups/name=traefik/vm_extensions?/-
-  type: replace
-  value: ((traefik_vm_extension))
