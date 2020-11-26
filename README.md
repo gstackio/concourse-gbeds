@@ -1,3 +1,15 @@
+Depreciation notice
+===================
+
+This project is deprecated in favor of the new [Concourse Turbine project][concourse_turbine],
+based on the [Turbine Framework][turbine_framework]. _Turbine Framework_ is
+the new name for GBE (Gstack BOSH Environment). That's where future updates
+will be pushed.
+
+[concourse_turbine]: https://github.com/gstackio/concourse-turbine
+[turbine_framework]: https://github.com/gstackio/turbine-cli
+
+
 Concourse GBE Downstream
 ========================
 
@@ -158,7 +170,7 @@ Please feel free to submit issues and pull requests.
 Author and License
 ------------------
 
-Copyright © 2018, Benjamin Gandon, Gstack
+Copyright © 2018-2020, Benjamin Gandon, Gstack
 
 Like BOSH and GBE, this example GBE downstream project is released under the
 terms of the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0).
