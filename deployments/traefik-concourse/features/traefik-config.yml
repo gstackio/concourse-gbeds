@@ -10,11 +10,11 @@
     enabled: true
     rules: |
       [backends]
-        [backends.traefik-ui]
-          [backends.traefik-ui.servers.server1]
+        [backends.traefik-api]
+          [backends.traefik-api.servers.server1]
           url = "https://127.0.0.1:8443"
 
-          [backends.traefik-ui.healthCheck]
+          [backends.traefik-api.healthCheck]
             path = "/ping"
 
 
